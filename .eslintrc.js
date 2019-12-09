@@ -18,6 +18,7 @@ module.exports = {
   },
   plugins: ['react', 'prettier'],
   rules: {
+    'react/jsx-props-no-spreading': 'off',
     'react/no-unused-state': 'off',
     'react/state-in-constructor': 'off',
     'react/static-property-placement': 'off',
