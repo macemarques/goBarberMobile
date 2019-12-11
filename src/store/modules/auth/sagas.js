@@ -16,7 +16,7 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
-    if (!user.provider) {
+    if (user.provider) {
       Alert.alert('Login Error.', 'User can not be a provider.');
       // toast.error('User is not a provider.');
       // Acho que deveria ter pois após testar um usuario que nao é
@@ -45,7 +45,7 @@ export function* signIn({ payload }) {
 export function* signUp({ payload }) {
   try {
     const { name, email, password } = payload;
-    yield call(api.post, 'users', { name, email, password, provider: true });
+    yield call(api.post, 'users', { name, email, password });
     // history.push('/');
   } catch (err) {
     Alert.alert('SignUp failed.', 'SignUp data error, check your data.');
