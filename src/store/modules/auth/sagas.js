@@ -1,6 +1,5 @@
 import { Alert } from 'react-native';
-import { takeLatest, call, put, all } from 'redux-saga/effects';
-// import { toast } from 'react-toastify';
+import { takeLatest, call, put, all, delay } from 'redux-saga/effects';
 
 import api from '~/services/api';
 import { signInSuccess, signFailure } from './actions';
@@ -18,7 +17,6 @@ export function* signIn({ payload }) {
 
     if (user.provider) {
       Alert.alert('Login Error.', 'User can not be a provider.');
-      // toast.error('User is not a provider.');
       // Acho que deveria ter pois após testar um usuario que nao é
       // provider fica marcando loading no botao
       yield put(signFailure());
@@ -33,11 +31,6 @@ export function* signIn({ payload }) {
     // history.push('/dashboard');
   } catch (err) {
     Alert.alert('Authentication failed.', 'Login data error, check your data.');
-
-    // toast.error('Authentication failed.', {
-    //   position: toast.POSITION.TOP_CENTER,
-    // });
-
     yield put(signFailure());
   }
 }
@@ -45,6 +38,7 @@ export function* signIn({ payload }) {
 export function* signUp({ payload }) {
   try {
     const { name, email, password } = payload;
+    yield delay(3000);
     yield call(api.post, 'users', { name, email, password });
     // history.push('/');
   } catch (err) {
