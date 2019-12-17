@@ -34,6 +34,7 @@ export default (isSigned = false) =>
                   Confirm,
                 },
                 {
+                  headerLayoutPreset: 'center',
                   defaultNavigationOptions: {
                     headerTransparent: true,
                     headerTintColor: '#fff',
