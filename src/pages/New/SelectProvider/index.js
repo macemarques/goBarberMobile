@@ -7,12 +7,12 @@ import api from '~/services/api';
 import Background from '~/components/Background';
 import { Container, ProvidersList, Provider, Avatar, Name } from './styles';
 
-export default function SelectProvider() {
+export default function SelectProvider({ navigation }) {
   const [providers, setProviders] = useState([]);
 
   useEffect(() => {
     async function loadProviders() {
-      const response = api.get('providers');
+      const response = await api.get('providers');
 
       setProviders(response.data);
     }
@@ -26,7 +26,11 @@ export default function SelectProvider() {
           data={providers}
           keyExtractor={provider => String(provider.id)}
           renderItem={({ item: provider }) => (
-            <Provider>
+            <Provider
+              onPress={() =>
+                navigation.navigate('SelectDateTime', { provider })
+              }
+            >
               <Avatar
                 source={{
                   uri: provider.avatar
